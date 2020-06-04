@@ -243,6 +243,13 @@ bool AP_GPS_NMEA::_term_complete()
                     //date                        = _new_date;
                     state.location.lat     = _new_latitude;
                     state.location.lng     = _new_longitude;
+                    
+                    // UWB is used and in as second instance                    
+                    if (gps._uwb_used > 0 && this == gps.drivers[GPS_MAX_RECEIVERS-1]) {
+                        state.location.lat += (int32_t)(gps._uwb_origin_lat - 225180977);
+                        state.location.lng += (int32_t)(gps._uwb_origin_lng - 1139007239);
+                    }
+                    
                     state.ground_speed     = _new_speed*0.01f;
                     state.ground_course    = wrap_360(_new_course*0.01f);
                     make_gps_time(_new_date, _new_time * 10);
@@ -256,6 +263,14 @@ bool AP_GPS_NMEA::_term_complete()
                     state.location.lat  = _new_latitude;
                     state.location.lng  = _new_longitude;
                     state.num_sats      = _new_satellite_count;
+
+                    // UWB is used and in as second instance
+                    if ((gps._uwb_used > 0 && this == gps.drivers[GPS_MAX_RECEIVERS-1])) {
+                        state.location.lat += (int32_t)(gps._uwb_origin_lat - 225180977);
+                        state.location.lng += (int32_t)(gps._uwb_origin_lng - 1139007239);
+                        state.num_sats = gps._uwb_num_sats;
+                    }
+
                     state.hdop          = _new_hdop;
                     switch(_new_quality_indicator) {
                     case 0: // Fix not available or invalid
