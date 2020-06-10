@@ -284,6 +284,14 @@ const AP_Param::GroupInfo AP_GPS::var_info[] = {
     AP_GROUPINFO("BLEND_TC", 21, AP_GPS, _blend_tc, 10.0f),
 #endif
 
+    AP_GROUPINFO("UWB_USE", 22, AP_GPS, _uwb_use, 0),
+
+    AP_GROUPINFO("UWB_SATS", 23, AP_GPS, _uwb_num_sats, 8),
+
+    AP_GROUPINFO("UWB_LAT", 24, AP_GPS, _uwb_origin_lat, 0),
+    
+    AP_GROUPINFO("UWB_LNG", 25, AP_GPS, _uwb_origin_lng, 0),
+
     AP_GROUPEND
 };
 

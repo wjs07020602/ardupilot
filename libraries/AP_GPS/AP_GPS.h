@@ -461,6 +461,12 @@ protected:
     AP_Int8 _blend_mask;
     AP_Float _blend_tc;
 
+    // UWB-gps configuration parameters
+    AP_Int8 _uwb_use;
+    AP_Int8 _uwb_num_sats;
+    AP_Int32 _uwb_origin_lat;
+    AP_Int32 _uwb_origin_lng;
+
     uint32_t _log_gps_bit = -1;
 
 private:
